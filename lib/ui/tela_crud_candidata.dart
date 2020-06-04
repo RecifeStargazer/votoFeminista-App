@@ -12,19 +12,36 @@ class _CrudCandidataState extends State<CrudCandidata> {
   String _cidade;
   String _estado;
   String _email;
-  String _militancia;
-  String _filiada;
+  String _primeiraCandidatura;
+  String _jaEleita;
   String _partido;
   String _nome;
+  String _password;
+  String _passwordConfirm;
+  String _cargoEleicao;
+  String _cargoEleito;
   String _cidadeResult;
   String _estadoResult;
   String _emailResult;
-  String _militanciaResult;
-  String _filiadaResult;
+  String _primeiraCandidaturaResult;
+  String _jaEleitaResult;
   String _partidoResult;
   String _nomeResult;
   List _causasSociais;
+  List _meiosColaboracao;
   String _causasSociaisResult;
+  String _meiosColaboracaoResult;
+  String _passwordResult;
+  String _passwordConfirmResult;
+  String _cargoEleicaoResult;
+  String _cargoEleitoResult;
+  String _numero;
+  String _numeroResult;
+
+  void _montarPerfilCandidata(){
+
+  }
+
   final formKey = new GlobalKey<FormState>();
 
   @override
@@ -33,19 +50,31 @@ class _CrudCandidataState extends State<CrudCandidata> {
     _cidade = '';
     _estado = '';
     _email = '';
-    _militancia = '';
-    _filiada = '';
+    _primeiraCandidatura = '';
+    _jaEleita = '';
     _partido = '';
     _nome = '';
+    _password = '';
+    _passwordConfirm = '';
     _causasSociais = [];
+    _meiosColaboracao = [];
     _cidadeResult = '';
     _estadoResult = '';
     _emailResult = '';
-    _militanciaResult = '';
-    _filiadaResult = '';
+    _primeiraCandidaturaResult = '';
+    _jaEleitaResult = '';
     _partidoResult = '';
     _nomeResult = '';
     _causasSociaisResult = '';
+    _meiosColaboracaoResult = '';
+    _passwordResult = '';
+    _passwordConfirmResult = '';
+    _cargoEleicao = '';
+    _cargoEleicaoResult = '';
+    _cargoEleito = '';
+    _cargoEleitoResult = '';
+    _numero = '';
+    _numeroResult = '';
   }
 
   _saveForm() {
@@ -56,11 +85,16 @@ class _CrudCandidataState extends State<CrudCandidata> {
         _cidadeResult = _cidade;
         _estadoResult = _estado;
         _emailResult = _email;
-        _militanciaResult = _militancia;
-        _filiadaResult = _filiada;
+        _primeiraCandidaturaResult = _primeiraCandidatura;
+        _jaEleitaResult = _jaEleita;
         _partidoResult = _partido;
         _nomeResult = _nome;
         _causasSociaisResult = _causasSociais.toString();
+        _meiosColaboracaoResult = _meiosColaboracao.toString();
+        _passwordResult = _password;
+        _passwordConfirmResult = _passwordConfirm;
+        _cargoEleicaoResult = _cargoEleicao;
+        _numeroResult = _numero;
       });
       debugPrint(_causasSociaisResult);
     }
@@ -83,24 +117,145 @@ class _CrudCandidataState extends State<CrudCandidata> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Container(
+                      padding: EdgeInsets.all(3),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          labelText: "Número",
+                          hintText: "Digite seu número de candidatura",
+                          icon: Icon(Icons.code),
+                        ),
+                        onChanged: (value) {
+                          if (value != null && value.length > 0) {
+                            setState(() {
+                              _numero = value;
+                            });
+                          }
+                        },
+                        onSaved: (value) {
+                          setState(() {
+                            _numero = value;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Container(
+                      padding: EdgeInsets.all(3),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          labelText: "Nome",
+                          hintText: "Digite seu nome",
+                          icon: Icon(Icons.person),
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            _email = value;
+                          });
+                        },
+                        onSaved: (value) {
+                          setState(() {
+                            _email = value;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Container(
+                      padding: EdgeInsets.all(3),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          labelText: "E-mail",
+                          hintText: "Digite seu E-mail",
+                          icon: Icon(Icons.mail),
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            _nome = value;
+                          });
+                        },
+                        onSaved: (value) {
+                          setState(() {
+                            _nome = value;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Container(
+                      padding: EdgeInsets.all(3),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          labelText: "Senha",
+                          hintText: "Digite sua senha",
+                          icon: Icon(Icons.lock),
+                        ),
+                        obscureText: true,
+                        onChanged: (value) {
+                          setState(() {
+                            _password = value;
+                          });
+                        },
+                        onSaved: (value) {
+                          setState(() {
+                            _password = value;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Container(
+                      padding: EdgeInsets.all(3),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          labelText: "Confirmação de senha",
+                          hintText: "Digite novamente a sua senha",
+                          icon: Icon(Icons.lock),
+                        ),
+                        obscureText: true,
+                        onChanged: (value) {
+                          setState(() {
+                            _passwordConfirm = value;
+                          });
+                        },
+                        onSaved: (value) {
+                          setState(() {
+                            _passwordConfirm = value;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
                   Row(
                     children: <Widget>[
                       Expanded(
                         child: Container(
-                          padding: EdgeInsets.all(6),
+                          padding: EdgeInsets.all(2),
                           child: DropDownFormField(
-                            required: true,
+                            required: false,
                             filled: false,
-                            titleText: 'Estado onde vota',
+                            titleText: 'Estado onde concorre',
                             hintText: 'Escolha seu Estado',
                             value: _estado,
                             onSaved: (value) {
                               setState(() {
+                                FocusScope.of(context).requestFocus(new FocusNode());
                                 _estado = value;
                               });
                             },
                             onChanged: (value) {
                               setState(() {
+                                FocusScope.of(context).requestFocus(new FocusNode());
                                 _estado = value;
                               });
                             },
@@ -119,23 +274,24 @@ class _CrudCandidataState extends State<CrudCandidata> {
                           ),
                         ),
                       ),
-
                       Expanded(
                         child: Container(
-                          padding: EdgeInsets.all(6),
+                          padding: EdgeInsets.all(2),
                           child: DropDownFormField(
-                            required: true,
+                            required: false,
                             filled: false,
-                            titleText: 'Cidade onde vota',
+                            titleText: 'Cidade onde concorre',
                             hintText: 'Escolha sua cidade',
                             value: _cidade,
                             onSaved: (value) {
                               setState(() {
+                                FocusScope.of(context).requestFocus(new FocusNode());
                                 _cidade = value;
                               });
                             },
                             onChanged: (value) {
                               setState(() {
+                                FocusScope.of(context).requestFocus(new FocusNode());
                                 _cidade = value;
                               });
                             },
@@ -160,67 +316,34 @@ class _CrudCandidataState extends State<CrudCandidata> {
                     children: <Widget>[
                       Expanded(
                         child: Container(
-                          padding: EdgeInsets.all(6),
+                          padding: EdgeInsets.all(2),
                           child: DropDownFormField(
-                            required: true,
+                            required: false,
                             filled: false,
-                            titleText: 'Fez militancia?',
-                            hintText: 'Selecione',
-                            value: _militancia,
+                            titleText: 'Cargo a que concorre',
+                            hintText: 'Escolha o cargo a que concorre',
+                            value: _cargoEleicao,
                             onSaved: (value) {
                               setState(() {
-                                _militancia = value;
+                                FocusScope.of(context).requestFocus(new FocusNode());
+                                _cargoEleicao = value;
                               });
                             },
                             onChanged: (value) {
                               setState(() {
-                                _militancia = value;
+                                FocusScope.of(context).requestFocus(new FocusNode());
+                                _cargoEleicao = value;
                               });
                             },
                             dataSource: [
                               {
-                                "display": "Sim",
-                                "value": "Sim",
+                                "display": "Vereadora",
+                                "value": "Vereadora",
                               },
                               {
-                                "display": "Não",
-                                "value": "Não",
-                              },
-                            ],
-                            textField: 'display',
-                            valueField: 'value',
-                          ),
-                        ),
-                      ),
-
-                      Expanded(
-                        child: Container(
-                          padding: EdgeInsets.all(6),
-                          child: DropDownFormField(
-                            required: true,
-                            filled: false,
-                            titleText: 'É filiada a partido',
-                            hintText: 'Selecione',
-                            value: _filiada,
-                            onSaved: (value) {
-                              setState(() {
-                                _filiada = value;
-                              });
-                            },
-                            onChanged: (value) {
-                              setState(() {
-                                _filiada = value;
-                              });
-                            },
-                            dataSource: [
-                              {
-                                "display": "Sim",
-                                "value": "Sim",
-                              },
-                              {
-                                "display": "Não",
-                                "value": "Não",
-                              },
+                                "display": "Prefeita",
+                                "value": "Prefeita",
+                              }
                             ],
                             textField: 'display',
                             valueField: 'value',
@@ -229,38 +352,118 @@ class _CrudCandidataState extends State<CrudCandidata> {
                       ),
                     ],
                   ),
-                  Visibility(
-                    visible: _filiada=='Sim',
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.all(2),
+                          child: DropDownFormField(
+                            required: false,
+                            filled: false,
+                            titleText: 'Primeira Candidatura?',
+                            hintText: 'Selecione',
+                            value: _primeiraCandidatura,
+                            onSaved: (value) {
+                              setState(() {
+                                FocusScope.of(context).requestFocus(new FocusNode());
+                                _primeiraCandidatura = value;
+                              });
+                            },
+                            onChanged: (value) {
+                              setState(() {
+                                FocusScope.of(context).requestFocus(new FocusNode());
+                                _primeiraCandidatura = value;
+                              });
+                            },
+                            dataSource: [
+                              {
+                                "display": "Sim",
+                                "value": "Sim",
+                              },
+                              {
+                                "display": "Não",
+                                "value": "Não",
+                              },
+                            ],
+                            textField: 'display',
+                            valueField: 'value',
+                          ),
+                        ),
+                      ),
+                      Visibility(
+                        visible: _primeiraCandidatura == 'Não',
+                        child: Expanded(
                           child: Container(
-
-                            padding: EdgeInsets.all(6),
+                            padding: EdgeInsets.all(2),
                             child: DropDownFormField(
+                              required: false,
                               filled: false,
-                              required: true,
-                              titleText: 'Partido',
+                              titleText: 'Já foi eleita antes?',
                               hintText: 'Selecione',
-                              value: _partido,
+                              value: _jaEleita,
                               onSaved: (value) {
                                 setState(() {
-                                  _partido = value;
+                                  FocusScope.of(context).requestFocus(new FocusNode());
+                                  _jaEleita = value;
                                 });
                               },
                               onChanged: (value) {
                                 setState(() {
-                                  _partido = value;
+                                  FocusScope.of(context).requestFocus(new FocusNode());
+                                  _jaEleita = value;
                                 });
                               },
                               dataSource: [
                                 {
-                                  "display": "PT",
-                                  "value": "PT",
+                                  "display": "Sim",
+                                  "value": "Sim",
                                 },
                                 {
-                                  "display": "PCB",
-                                  "value": "PCB",
+                                  "display": "Não",
+                                  "value": "Não",
+                                },
+                              ],
+                              textField: 'display',
+                              valueField: 'value',
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Visibility(
+                    visible: _jaEleita == 'Sim',
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.all(2),
+                            child: DropDownFormField(
+                              filled: false,
+                              required: false,
+                              titleText: 'Para qual cargo?',
+                              hintText: 'Selecione',
+                              value: _cargoEleito,
+                              onSaved: (value) {
+                                setState(() {
+                                  FocusScope.of(context).requestFocus(new FocusNode());
+                                  _cargoEleito = value;
+                                });
+                              },
+                              onChanged: (value) {
+                                setState(() {
+                                  FocusScope.of(context).requestFocus(new FocusNode());
+                                  _cargoEleito = value;
+                                });
+                              },
+                              dataSource: [
+                                {
+                                  "display": "Vereadora",
+                                  "value": "Vereadora",
+                                },
+                                {
+                                  "display": "Prefeita",
+                                  "value": "Prefeita",
                                 },
                               ],
                               textField: 'display',
@@ -271,149 +474,121 @@ class _CrudCandidataState extends State<CrudCandidata> {
                       ],
                     ),
                   ),
-                  Container(
-                      child: MultiSelectFormField(
-                        textField: 'display',
-                        valueField: 'value',
-                        titleText: 'Causas Sociais',
-                        okButtonLabel: 'OK',
-                        cancelButtonLabel: 'CANCELAR',
-                        hintText: 'Selecione uma ou mais causas que apoia',
-                        validator: (value) {
-                          if (value == null || value.length == 0) {
-                            return 'Please select one or more options';
-                          }
-                        },
-                        required: true,
-                        change: (value){
-                          if (value == null) return;
-                          setState(() {
-                            _causasSociais = value;
-                          });
-                        },
-                        onSaved: (value) {
-                          if (value == null) return;
-                          setState(() {
-                            _causasSociais = value;
-                          });
-                        },
-                        dataSource: [
-                          {
-                            "display": "Aborto",
-                            "value": "Aborto",
-                          },
-                          {
-                            "display": "Igualdade",
-                            "value": "Igualdade",
-                          },
-                          {
-                            "display": "Oportunidades",
-                            "value": "Oportunidades",
-                          },
-                          {
-                            "display": "Liberdade",
-                            "value": "Liberdade",
-                          },
-                        ],
-                      )
-                  ),
-                  Container(
-                      child: MultiSelectFormField(
-                        textField: 'display',
-                        valueField: 'value',
-                        titleText: 'Meios de Colaboracao',
-                        okButtonLabel: 'OK',
-                        cancelButtonLabel: 'CANCELAR',
-                        hintText: 'Selecione um ou mais meios de colaboracao',
-                        validator: (value) {
-                          if (value == null || value.length == 0) {
-                            return 'Please select one or more options';
-                          }
-                        },
-                        required: true,
-                        change: (value){
-                          if (value == null) return;
-                          setState(() {
-                            _causasSociais = value;
-                          });
-                        },
-                        onSaved: (value) {
-                          if (value == null) return;
-                          setState(() {
-                            _causasSociais = value;
-                          });
-                        },
-                        dataSource: [
-                          {
-                            "display": "Panfletagem",
-                            "value": "Panfletagem",
-                          },
-                          {
-                            "display": "Passeatas",
-                            "value": "Passeatas",
-                          },
-                          {
-                            "display": "Apoio em mídias sociais",
-                            "value": "Midias",
-                          },
-                          {
-                            "display": "Doação para campanha",
-                            "value": "Doação",
-                          },
-                        ],
-                      )
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(6),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                          hintText: "Digite seu E-mail"
-                      ),
-                      onChanged: (value) {
+                  Padding(
+                    padding: const EdgeInsets.all(2),
+                    child: Container(
+                        child: MultiSelectFormField(
+                      textField: 'display',
+                      valueField: 'value',
+                      titleText: 'Causas Sociais',
+                      okButtonLabel: 'OK',
+                      cancelButtonLabel: 'CANCELAR',
+                      hintText: 'Selecione uma ou mais causas que apoia',
+                      validator: (value) {
+                        if (value == null || value.length == 0) {
+                          return 'Please select one or more options';
+                        }
+                      },
+                      required: false,
+                      change: (value) {
+                        if (value == null) return;
                         setState(() {
-                          _email = value;
+                          FocusScope.of(context).requestFocus(new FocusNode());
+                          _causasSociais = value;
                         });
                       },
                       onSaved: (value) {
+                        if (value == null) return;
                         setState(() {
-                          _email = value;
+                          FocusScope.of(context).requestFocus(new FocusNode());
+                          _causasSociais = value;
                         });
                       },
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(6),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                          hintText: "Digite seu nome"
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          _nome = value;
-                        });
-                      },
-                      onSaved: (value) {
-                        setState(() {
-                          _nome = value;
-                        });
-                      },
-                    ),
+                      dataSource: [
+                        {
+                          "display": "Aborto",
+                          "value": "Aborto",
+                        },
+                        {
+                          "display": "Igualdade",
+                          "value": "Igualdade",
+                        },
+                        {
+                          "display": "Oportunidades",
+                          "value": "Oportunidades",
+                        },
+                        {
+                          "display": "Liberdade",
+                          "value": "Liberdade",
+                        },
+                      ],
+                    )),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(
-                        top: (_deviceHeight/6).floor().floorToDouble()
-                    ),
+                    padding: const EdgeInsets.all(2),
+                    child: Container(
+                        child: MultiSelectFormField(
+                      textField: 'display',
+                      valueField: 'value',
+                      titleText: 'Meios de Colaboração',
+                      okButtonLabel: 'OK',
+                      cancelButtonLabel: 'CANCELAR',
+                      hintText: 'Selecione um ou mais meios de colaboração',
+                      validator: (value) {
+                        if (value == null || value.length == 0) {
+                          return 'Please select one or more options';
+                        }
+                      },
+                      required: false,
+                      change: (value) {
+                        if (value == null) return;
+                        setState(() {
+                          FocusScope.of(context).requestFocus(new FocusNode());
+                          _meiosColaboracao = value;
+                        });
+                      },
+                      onSaved: (value) {
+                        if (value == null) return;
+                        setState(() {
+                          FocusScope.of(context).requestFocus(new FocusNode());
+                          _meiosColaboracao = value;
+                        });
+                      },
+                      dataSource: [
+                        {
+                          "display": "Panfletagem",
+                          "value": "Panfletagem",
+                        },
+                        {
+                          "display": "Passeatas",
+                          "value": "Passeatas",
+                        },
+                        {
+                          "display": "Apoio em mídias sociais",
+                          "value": "Midias",
+                        },
+                        {
+                          "display": "Doação para campanha",
+                          "value": "Doação",
+                        },
+                      ],
+                    )),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(2),
+                    //only(top: (_deviceHeight / 20).floor().floorToDouble()),
                     child: Row(
                       children: <Widget>[
                         Expanded(
                           child: SimpleRoundButton(
                             onPressed: () => null,
-                            buttonText: Text("Cadastrar",
+                            buttonText: Text(
+                              "Cadastrar",
                               style: TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.white
-                              ),),
+                                  color: Colors.white),
+                            ),
                             backgroundColor: Color.fromRGBO(95, 35, 99, 10),
                             textColor: Colors.white,
                           ),
