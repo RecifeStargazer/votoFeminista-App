@@ -1,4 +1,6 @@
-import 'dart:core';
+import 'package:json_annotation/json_annotation.dart';
+part 'estado.g.dart';
+@JsonSerializable()
 class Estado{
   int _id;
   String _nome;
@@ -7,6 +9,10 @@ class Estado{
   Estado();
 
   Estado.init(this._id, this._nome, this._sigla);
+
+  factory Estado.fromJson(Map<String, dynamic> json) => _$EstadoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$EstadoToJson(this);
 
   String get sigla => _sigla;
 
@@ -27,6 +33,11 @@ class Estado{
   }
 
   @override
+  String toString() {
+    return 'Estado{_id: $_id, _nome: $_nome, _sigla: $_sigla}';
+  }
+
+  @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is Estado &&
@@ -38,8 +49,5 @@ class Estado{
   @override
   int get hashCode => _id.hashCode ^ _nome.hashCode ^ _sigla.hashCode;
 
-  @override
-  String toString() {
-    return 'Estado{_id: $_id, _nome: $_nome, _sigla: $_sigla}';
-  }
+
 }

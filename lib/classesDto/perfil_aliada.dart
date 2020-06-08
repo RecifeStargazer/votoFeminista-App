@@ -1,8 +1,11 @@
 import 'package:aliadasapp/classesDto/meios_colaboracao.dart';
 import 'package:aliadasapp/classesDto/partido.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'causas_sociais.dart';
 import 'cidade.dart';
 
+part 'perfil_aliada.g.dart';
+@JsonSerializable(explicitToJson:true)
 class PerfilAliada {
   int _id;
   String _email;
@@ -35,7 +38,12 @@ class PerfilAliada {
       this._cidade,
       this._partido,
       this._causasApoiadas,
-      this._meiosColaboracao);
+      this._meiosColaboracao
+      );
+
+  factory PerfilAliada.fromJson(Map<String, dynamic> json) => _$PerfilAliadaFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PerfilAliadaToJson(this);
 
   List<MeioColaboracao> get meiosColaboracao => _meiosColaboracao;
 
@@ -120,6 +128,12 @@ class PerfilAliada {
   set id(int value) {
     _id = value;
   }
+
+  @override
+  String toString() {
+    return 'PerfilAliada{_id: $_id, _email: $_email, _senha: $_senha, _nomeCompleto: $_nomeCompleto, _nomeSocial: $_nomeSocial, _idFotoPerfil: $_idFotoPerfil, _descricaoPerfil: $_descricaoPerfil, _flagCompromisso: $_flagCompromisso, _fezMilitancia: $_fezMilitancia, _filiadaAPartido: $_filiadaAPartido, _cidade: $_cidade, _partido: $_partido, _causasApoiadas: $_causasApoiadas, _meiosColaboracao: $_meiosColaboracao}';
+  }
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -156,9 +170,4 @@ class PerfilAliada {
       _partido.hashCode ^
       _causasApoiadas.hashCode ^
       _meiosColaboracao.hashCode;
-
-  @override
-  String toString() {
-    return 'PerfilAliada{_id: $_id, _email: $_email, _senha: $_senha, _nomeCompleto: $_nomeCompleto, _nomeSocial: $_nomeSocial, _idFotoPerfil: $_idFotoPerfil, _descricaoPerfil: $_descricaoPerfil, _flagCompromisso: $_flagCompromisso, _fezMilitancia: $_fezMilitancia, _filiadaAPartido: $_filiadaAPartido, _cidade: $_cidade, _partido: $_partido, _causasApoiadas: $_causasApoiadas, _meiosColaboracao: $_meiosColaboracao}';
-  }
 }

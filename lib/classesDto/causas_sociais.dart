@@ -1,3 +1,6 @@
+import 'package:json_annotation/json_annotation.dart';
+part 'causas_sociais.g.dart';
+@JsonSerializable()
 class CausaSocial {
   int _id;
   String _titulo;
@@ -6,6 +9,10 @@ class CausaSocial {
   CausaSocial();
 
   CausaSocial.init(this._id, this._titulo, this._descricao);
+
+  factory CausaSocial.fromJson(Map<String, dynamic> json) => _$CausaSocialFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CausaSocialToJson(this);
 
   String get descricao => _descricao;
 
@@ -26,6 +33,11 @@ class CausaSocial {
   }
 
   @override
+  String toString() {
+    return 'CausaSocial{_id: $_id, _titulo: $_titulo, _descricao: $_descricao}';
+  }
+
+  @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is CausaSocial &&
@@ -36,9 +48,4 @@ class CausaSocial {
 
   @override
   int get hashCode => _id.hashCode ^ _titulo.hashCode ^ _descricao.hashCode;
-
-  @override
-  String toString() {
-    return 'CausaSocial{_id: $_id, _titulo: $_titulo, _descricao: $_descricao}';
-  }
 }

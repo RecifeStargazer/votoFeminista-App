@@ -1,3 +1,6 @@
+import 'package:json_annotation/json_annotation.dart';
+part 'partido.g.dart';
+@JsonSerializable()
 class Partido {
   int _id;
   int _numero;
@@ -7,6 +10,10 @@ class Partido {
   Partido();
 
   Partido.init(this._id, this._numero, this._sigla, this._descricao);
+
+  factory Partido.fromJson(Map<String, dynamic> json) => _$PartidoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PartidoToJson(this);
 
   String get descricao => _descricao;
 
@@ -33,6 +40,11 @@ class Partido {
   }
 
   @override
+  String toString() {
+    return 'Partido{_id: $_id, _numero: $_numero, _sigla: $_sigla, _descricao: $_descricao}';
+  }
+
+  @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is Partido &&
@@ -45,9 +57,4 @@ class Partido {
   @override
   int get hashCode =>
       _id.hashCode ^ _numero.hashCode ^ _sigla.hashCode ^ _descricao.hashCode;
-
-  @override
-  String toString() {
-    return 'Partido{_id: $_id, _numero: $_numero, _sigla: $_sigla, _descricao: $_descricao}';
-  }
 }

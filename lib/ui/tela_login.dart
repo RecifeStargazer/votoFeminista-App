@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'components/SimpleRoundButton.dart';
+import 'package:aliadasapp/ui/components/SimpleRoundButton.dart';
 
 
 class TelaLogin extends StatefulWidget {
@@ -15,17 +15,17 @@ class _TelaLoginState extends State<TelaLogin> {
     double _deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: Color.fromRGBO(200, 200, 200, 50),
           body: ListView(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: const EdgeInsets.only(top: 70, right: 8, left: 8, bottom: 8),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     Expanded(
                       child: Image.asset(
-                        'assets/background.jpeg',
+                        'asset/background.png',
                       ),
                     ),
                   ],
@@ -38,7 +38,7 @@ class _TelaLoginState extends State<TelaLogin> {
 
                     Padding(
                       padding: EdgeInsets.only(
-                        top: (_deviceHeight/10).floor().floorToDouble()
+                        top: (_deviceHeight/12).floor().floorToDouble()
                       ),
                       child: Container(
                         decoration: BoxDecoration(
@@ -122,8 +122,8 @@ class _TelaLoginState extends State<TelaLogin> {
               ),
               Padding(
                 padding: EdgeInsets.only(
-                    top: (_deviceHeight/20).floor().floorToDouble()
-                ),
+                    top: 6//(_deviceHeight/80).floor().floorToDouble()
+                    ),
                 child: Container(
                     alignment: Alignment.bottomCenter,
                     child: Column(
