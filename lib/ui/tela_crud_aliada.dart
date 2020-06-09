@@ -290,7 +290,6 @@ class _CrudAliadaState extends State<CrudAliada> {
                             labelText: "Quer nos falar um pouco de você?",
                             hintText: "Digite uma pequena biografia"
                         ),
-                        obscureText: true,
                         onChanged: (value) {
                           setState(() {
                             _descricaoPerfil = value;
@@ -512,6 +511,7 @@ class _CrudAliadaState extends State<CrudAliada> {
                           okButtonLabel: 'OK',
                           cancelButtonLabel: 'CANCELAR',
                           hintText: 'Selecione uma ou mais causas que apoia',
+
                           change: (value) {
                             if (value == null) return;
                             setState(() {

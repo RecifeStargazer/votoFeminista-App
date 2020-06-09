@@ -10,7 +10,7 @@ part 'perfil_candidata.g.dart';
 @JsonSerializable(explicitToJson:true)
 class PerfilCandidata {
   int _id;
-  String _numeroCandidata;
+  int _numeroCandidata;
   String _email;
   String _senha;
   String _nomeCompleto;
@@ -23,7 +23,7 @@ class PerfilCandidata {
   bool _primeiroMandato;
   Cidade _cidade;
   Partido _partido;
-  List<CausaSocial> _causasApoiadas;
+  List<CausaSocial> _causasSociais;
   List<MeioColaboracao> _meiosColaboracao;
   List<Missao> _missoes;
   List<MeioContato> _meiosContato;
@@ -45,7 +45,7 @@ class PerfilCandidata {
       this._primeiroMandato,
       this._cidade,
       this._partido,
-      this._causasApoiadas,
+      this._causasSociais,
       this._meiosColaboracao
       );
 
@@ -71,10 +71,10 @@ class PerfilCandidata {
     _meiosColaboracao = value;
   }
 
-  List<CausaSocial> get causasApoiadas => _causasApoiadas;
+  List<CausaSocial> get causasApoiadas => _causasSociais;
 
   set causasApoiadas(List<CausaSocial> value) {
-    _causasApoiadas = value;
+    _causasSociais = value;
   }
 
   Partido get partido => _partido;
@@ -149,9 +149,9 @@ class PerfilCandidata {
     _email = value;
   }
 
-  String get numeroCandidata => _numeroCandidata;
+  int get numeroCandidata => _numeroCandidata;
 
-  set numeroCandidata(String value) {
+  set numeroCandidata(int value) {
     _numeroCandidata = value;
   }
 
@@ -163,7 +163,7 @@ class PerfilCandidata {
 
   @override
   String toString() {
-    return 'PerfilCandidata{_id: $_id, _numeroCandidata: $_numeroCandidata, _email: $_email, _senha: $_senha, _nomeCompleto: $_nomeCompleto, _nomeSocial: $_nomeSocial, _idFotoPerfil: $_idFotoPerfil, _descricaoPerfil: $_descricaoPerfil, _cargoCandidata: $_cargoCandidata, _flagCompromisso: $_flagCompromisso, _primeiraCandidatura: $_primeiraCandidatura, _primeiroMandato: $_primeiroMandato, _cidade: $_cidade, _partido: $_partido, _causasApoiadas: $_causasApoiadas, _meiosColaboracao: $_meiosColaboracao, _missoes: $_missoes, _meiosContato: $_meiosContato}';
+    return 'PerfilCandidata{_id: $_id, _numeroCandidata: $_numeroCandidata, _email: $_email, _senha: $_senha, _nomeCompleto: $_nomeCompleto, _nomeSocial: $_nomeSocial, _idFotoPerfil: $_idFotoPerfil, _descricaoPerfil: $_descricaoPerfil, _cargoCandidata: $_cargoCandidata, _flagCompromisso: $_flagCompromisso, _primeiraCandidatura: $_primeiraCandidatura, _primeiroMandato: $_primeiroMandato, _cidade: $_cidade, _partido: $_partido, _causasSociais: $_causasSociais, _meiosColaboracao: $_meiosColaboracao, _missoes: $_missoes, _meiosContato: $_meiosContato}';
   }
 
   @override
@@ -181,7 +181,7 @@ class PerfilCandidata {
               _primeiraCandidatura == other._primeiraCandidatura &&
               _primeiroMandato == other._primeiroMandato &&
               _cidade == other._cidade && _partido == other._partido &&
-              _causasApoiadas == other._causasApoiadas &&
+              _causasSociais == other._causasSociais &&
               _meiosColaboracao == other._meiosColaboracao &&
               _missoes == other._missoes &&
               _meiosContato == other._meiosContato;
@@ -193,7 +193,7 @@ class PerfilCandidata {
           .hashCode ^ _idFotoPerfil.hashCode ^ _descricaoPerfil
           .hashCode ^ _cargoCandidata.hashCode ^ _flagCompromisso
           .hashCode ^ _primeiraCandidatura.hashCode ^ _primeiroMandato
-          .hashCode ^ _cidade.hashCode ^ _partido.hashCode ^ _causasApoiadas
+          .hashCode ^ _cidade.hashCode ^ _partido.hashCode ^ _causasSociais
           .hashCode ^ _meiosColaboracao.hashCode ^ _missoes
           .hashCode ^ _meiosContato.hashCode;
 

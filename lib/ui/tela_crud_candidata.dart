@@ -1,15 +1,18 @@
 import 'package:aliadasapp/classesDto/causas_sociais.dart';
 import 'package:aliadasapp/classesDto/cidade.dart';
 import 'package:aliadasapp/classesDto/estado.dart';
+import 'package:aliadasapp/classesDto/meio_contato.dart';
 import 'package:aliadasapp/classesDto/meios_colaboracao.dart';
 import 'package:aliadasapp/classesDto/partido.dart';
 import 'package:aliadasapp/classesDto/perfil_aliada.dart';
+import 'package:aliadasapp/classesDto/perfil_candidata.dart';
 import 'package:aliadasapp/services/causas_sociais_service.dart';
 import 'package:aliadasapp/services/cidade_service.dart';
 import 'package:aliadasapp/services/estado_service.dart';
 import 'package:aliadasapp/services/meios_colaboracao_service.dart';
 import 'package:aliadasapp/services/partido_service.dart';
 import 'package:aliadasapp/services/perfil_aliada_cadastro_service.dart';
+import 'package:aliadasapp/services/perfil_candidata_cadastro_service.dart';
 import 'package:aliadasapp/ui/components/SimpleRoundButton.dart';
 import 'package:aliadasapp/ui/components/custom_dropdown_formfield.dart';
 import 'package:aliadasapp/ui/components/custom_multiselect_formfield.dart';
@@ -31,29 +34,34 @@ class _CrudCandidataState extends State<CrudCandidata> {
   List<Estado> _estadoData = [];
   Estado _estadoResult;
   String _email;
-  String _militancia;
-  String _filiada;
+  String _primeiraCandidatura;
+  String _primeiroMandato;
   Partido _partido;
   List<Partido> _partidoData;
   Partido _partidoResult;
   String _nome;
+  String _nomeSocial;
   String _emailResult;
-  String _militanciaResult;
-  String _filiadaResult;
+  String _primeiraCandidaturaResult;
+  String _primeiroMandatoResult;
   String _nomeResult;
+  String _nomeSocialResult;
   List<CausaSocial> _causasSociaisData;
   List<CausaSocial> _causasSociais;
   List<CausaSocial> _causasSociaisResult;
   List<MeioColaboracao> _meiosColaboracaoData;
   List<MeioColaboracao> _meiosColaboracao;
   List<MeioColaboracao> _meiosColaboracaoResult;
+  List<MeioContato> _meiosContato;
   String _password;
   String _passwordConfirm;
   String _passwordResult;
   String _passwordConfirmResult;
   String _descricaoPerfil;
   String _descricaoPerfilResult;
-  //PerfilCandidata _perfilCandidata = PerfilCandidata();
+  String _numeroCandidatura;
+  int _numeroCandidaturaResult;
+  PerfilCandidata _perfilCandidata = PerfilCandidata();
 
   final formKey = new GlobalKey<FormState>();
 
@@ -63,16 +71,16 @@ class _CrudCandidataState extends State<CrudCandidata> {
     _cidade = null;
     _estado = null;
     _email = '';
-    _militancia = '';
-    _filiada = '';
+    _primeiraCandidatura = '';
+    _primeiroMandato = '';
     _partido = null;
     _nome = '';
     _causasSociais = [];
     _cidadeResult = null;
     _estadoResult = null;
     _emailResult = '';
-    _militanciaResult = '';
-    _filiadaResult = '';
+    _primeiraCandidaturaResult = '';
+    _primeiroMandatoResult = '';
     _partidoResult = null;
     _nomeResult = '';
     _causasSociaisResult = [];
@@ -81,7 +89,9 @@ class _CrudCandidataState extends State<CrudCandidata> {
     _passwordResult = '';
     _passwordConfirmResult = '';
     _descricaoPerfil = '';
-    _descricaoPerfilResult;
+    _descricaoPerfilResult = '';
+    String _numeroCandidatura = '';
+    int _numeroCandidaturaResult;
     _getCausasSociais();
     _getMeiosColaboracao();
     _getEstado();
@@ -94,23 +104,26 @@ class _CrudCandidataState extends State<CrudCandidata> {
       _cidadeResult = _cidade;
       _estadoResult = _estado;
       _emailResult = _email;
-      _militanciaResult = _militancia;
-      _filiadaResult = _filiada;
+      _primeiraCandidaturaResult = _primeiraCandidatura;
+      _primeiroMandatoResult = _primeiroMandato;
       _partidoResult = _partido;
       _nomeResult = _nome;
+      _nomeSocialResult = _nomeSocial;
       _passwordResult = _password;
       _passwordConfirmResult = _passwordConfirm;
       _causasSociaisResult = _causasSociais;
       _meiosColaboracaoResult = _meiosColaboracao;
       _descricaoPerfilResult = _descricaoPerfil;
-//      _criarPerfilCandidata();
+      _numeroCandidaturaResult = int.parse(_numeroCandidatura);
+      debugPrint(_perfilCandidata.toJson().toString());
+      _criarPerfilCandidata();
     });
   }
 
-/*  _postCadastrarPerfil(PerfilCandidata perfilCandidata){
+  _postCadastrarPerfil(PerfilCandidata perfilCandidata){
     Future<PerfilCandidata> perfilCandidataCadastrado = CadastroCandidataService.postCadastrarCandidata(perfilCandidata);
     debugPrint(perfilCandidataCadastrado.toString());
-  }*/
+  }
 
   _getCausasSociais() {
     CausasSociaisService.getCausasSociais().then((response) {
@@ -151,27 +164,29 @@ class _CrudCandidataState extends State<CrudCandidata> {
     });
   }
 
-  /*void _criarPerfilCandidata() {
+  void _criarPerfilCandidata() {
     _perfilCandidata.nomeCompleto = _nomeResult;
+    _perfilCandidata.nomeSocial = _nomeSocialResult;
+    _perfilCandidata.numeroCandidata = _numeroCandidaturaResult;
     _perfilCandidata.email = _emailResult;
     _perfilCandidata.id = 0;
-    _perfilCandidata.filiadaAPartido = _filiadaResult == "Sim" ? true : false;
-    _perfilCandidata.fezMilitancia = _militanciaResult == "Sim" ? true : false;
+    _perfilCandidata.primeiroMandato = _primeiroMandatoResult == "Sim" ? true : false;
+    _perfilCandidata.primeiraCandidatura = _primeiraCandidaturaResult == "Sim" ? true : false;
     _perfilCandidata.flagCompromisso = true;
     _perfilCandidata.senha = _passwordResult==_passwordConfirmResult && _password.length>0?_passwordResult: _password;
-    if(_perfilCandidata.filiadaAPartido){
-      _perfilCandidata.partido = _partidoResult;
-    }
+    _perfilCandidata.partido = _partidoResult;
     _perfilCandidata.causasApoiadas = _causasSociaisResult;
     _perfilCandidata.meiosColaboracao = _meiosColaboracaoResult;
     _perfilCandidata.cidade = _cidadeResult;
     _perfilCandidata.descricaoPerfil = _descricaoPerfilResult;
     _postCadastrarPerfil(_perfilCandidata);
 
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
+    double _deviceHeight = MediaQuery.of(context).size.height;
+    double _deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: Text('Cadastro de Candidata'),
@@ -186,6 +201,30 @@ class _CrudCandidataState extends State<CrudCandidata> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Container(
+                      padding: EdgeInsets.all(3),
+                      child: TextFormField(
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                            icon: Icon(Icons.confirmation_number),
+                            labelText: "Numero",
+                            hintText: "Digite o número de sua candidatura"
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            _numeroCandidatura = value;
+                          });
+                        },
+                        onSaved: (value) {
+                          setState(() {
+                            _numeroCandidatura = value;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Container(
@@ -214,6 +253,30 @@ class _CrudCandidataState extends State<CrudCandidata> {
                     child: Container(
                       padding: EdgeInsets.all(3),
                       child: TextFormField(
+                        decoration: InputDecoration(
+                            icon: Icon(Icons.person),
+                            labelText: "Nome social/candidatura",
+                            hintText: "Digite seu nome usado na candidatura"
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            _nomeSocial = value;
+                          });
+                        },
+                        onSaved: (value) {
+                          setState(() {
+                            _nomeSocial = value;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Container(
+                      padding: EdgeInsets.all(3),
+                      child: TextFormField(
+                        keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                             icon: Icon(Icons.mail),
                             labelText: "E-mail",
@@ -290,7 +353,6 @@ class _CrudCandidataState extends State<CrudCandidata> {
                             labelText: "Quer nos falar um pouco de você?",
                             hintText: "Digite uma pequena biografia"
                         ),
-                        obscureText: true,
                         onChanged: (value) {
                           setState(() {
                             _descricaoPerfil = value;
@@ -313,7 +375,7 @@ class _CrudCandidataState extends State<CrudCandidata> {
                             padding: EdgeInsets.all(6),
                             child: CustomDropDownFormField(
                               filled: false,
-                              titleText: 'Estado onde vota',
+                              titleText: 'Estado onde concorre',
                               hintText: 'Escolha seu Estado',
                               value: _estado!=null?_estado.id: null,
                               onSaved: (value) {
@@ -354,7 +416,7 @@ class _CrudCandidataState extends State<CrudCandidata> {
                             padding: EdgeInsets.all(6),
                             child: CustomDropDownFormField(
                               filled: false,
-                              titleText: 'Cidade onde vota',
+                              titleText: 'Cidade onde concorre',
                               hintText: 'Escolha sua cidade',
                               value:  _cidade!=null?_cidade.id: null,
                               onSaved: (value) {
@@ -387,26 +449,27 @@ class _CrudCandidataState extends State<CrudCandidata> {
                   Row(
                     children: <Widget>[
                       Expanded(
+
                         child: Container(
                           padding: EdgeInsets.all(6),
                           child: DropDownFormField(
                             required: true,
                             filled: false,
-                            titleText: 'Fez militancia?',
+                            titleText: 'Primeira Candidatura?',
                             hintText: 'Selecione',
-                            value: _militancia,
+                            value: _primeiraCandidatura,
                             onSaved: (value) {
                               setState(() {
                                 FocusScope.of(context).requestFocus(
                                     new FocusNode());
-                                _militancia = value;
+                                _primeiraCandidatura = value;
                               });
                             },
                             onChanged: (value) {
                               setState(() {
                                 FocusScope.of(context).requestFocus(
                                     new FocusNode());
-                                _militancia = value;
+                                _primeiraCandidatura = value;
                               });
                             },
                             dataSource: [
@@ -431,21 +494,21 @@ class _CrudCandidataState extends State<CrudCandidata> {
                           child: DropDownFormField(
                             required: true,
                             filled: false,
-                            titleText: 'É filiada a partido',
+                            titleText: 'Já foi eleita antes?',
                             hintText: 'Selecione',
-                            value: _filiada,
+                            value: _primeiroMandato,
                             onSaved: (value) {
                               setState(() {
                                 FocusScope.of(context).requestFocus(
                                     new FocusNode());
-                                _filiada = value;
+                                _primeiroMandato = value;
                               });
                             },
                             onChanged: (value) {
                               setState(() {
                                 FocusScope.of(context).requestFocus(
                                     new FocusNode());
-                                _filiada = value;
+                                _primeiroMandato = value;
                               });
                             },
                             dataSource: [
@@ -465,46 +528,43 @@ class _CrudCandidataState extends State<CrudCandidata> {
                       ),
                     ],
                   ),
-                  Visibility(
-                    visible: _filiada == 'Sim',
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Container(
-
-                            padding: EdgeInsets.all(6),
-                            child: CustomDropDownFormField(
-                              filled: false,
-                              required: true,
-                              titleText: 'Partido',
-                              hintText: 'Selecione',
-                              value: _partido!=null?_partido.id: null,
-                              onSaved: (value) {
-                                setState(() {
-                                  FocusScope.of(context).requestFocus(
-                                      new FocusNode());
-                                  _partido = value!=null && _partidoData.where((partidoData) => value==(partidoData.id)).toList().isNotEmpty?
-                                  _partidoData.where((partidoData) => value==(partidoData.id)).toList().elementAt(0): null;
-                                });
-                              },
-                              onChanged: (value) {
-                                setState(() {
-                                  FocusScope.of(context).requestFocus(
-                                      new FocusNode());
-                                  _partido = value!=null && _partidoData.where((partidoData) => value==(partidoData.id)).toList().isNotEmpty?
-                                  _partidoData.where((partidoData) => value==(partidoData.id)).toList().elementAt(0): null;
-                                });
-                              },
-                              dataSource: _partidoData,
-                              textField: 'sigla',
-                              valueField: 'id',
-                            ),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.all(6),
+                          child: CustomDropDownFormField(
+                            filled: false,
+                            required: true,
+                            titleText: 'Partido',
+                            hintText: 'Selecione',
+                            value: _partido!=null?_partido.id: null,
+                            onSaved: (value) {
+                              setState(() {
+                                FocusScope.of(context).requestFocus(
+                                    new FocusNode());
+                                _partido = value!=null && _partidoData.where((partidoData) => value==(partidoData.id)).toList().isNotEmpty?
+                                _partidoData.where((partidoData) => value==(partidoData.id)).toList().elementAt(0): null;
+                              });
+                            },
+                            onChanged: (value) {
+                              setState(() {
+                                FocusScope.of(context).requestFocus(
+                                    new FocusNode());
+                                _partido = value!=null && _partidoData.where((partidoData) => value==(partidoData.id)).toList().isNotEmpty?
+                                _partidoData.where((partidoData) => value==(partidoData.id)).toList().elementAt(0): null;
+                              });
+                            },
+                            dataSource: _partidoData,
+                            textField: 'sigla',
+                            valueField: 'id',
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                   Container(
+                      padding: EdgeInsets.all(6),
                       child: CustomMultiSelectFormField(
                           textField: 'titulo',
                           valueField: 'id',
@@ -534,6 +594,7 @@ class _CrudCandidataState extends State<CrudCandidata> {
                       )
                   ),
                   Container(
+                      padding: EdgeInsets.all(6),
                       child: CustomMultiSelectFormField(
                         textField: 'titulo',
                         valueField: 'id',

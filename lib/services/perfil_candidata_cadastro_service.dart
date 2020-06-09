@@ -12,8 +12,7 @@ class CadastroCandidataService {
       },
       body: jsonEncode(perfil)
     );
-    PerfilCandidata aliadaReturned = await PerfilCandidata.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
-    debugPrint(aliadaReturned.toString());
-    return aliadaReturned;
+    PerfilCandidata candidataReturned = await PerfilCandidata.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+    return candidataReturned;
   }
 }
