@@ -4,21 +4,18 @@ import 'package:aliadasapp/classesDto/estado.dart';
 import 'package:aliadasapp/classesDto/meio_contato.dart';
 import 'package:aliadasapp/classesDto/meios_colaboracao.dart';
 import 'package:aliadasapp/classesDto/partido.dart';
-import 'package:aliadasapp/classesDto/perfil_aliada.dart';
 import 'package:aliadasapp/classesDto/perfil_candidata.dart';
 import 'package:aliadasapp/services/causas_sociais_service.dart';
 import 'package:aliadasapp/services/cidade_service.dart';
 import 'package:aliadasapp/services/estado_service.dart';
 import 'package:aliadasapp/services/meios_colaboracao_service.dart';
 import 'package:aliadasapp/services/partido_service.dart';
-import 'package:aliadasapp/services/perfil_aliada_cadastro_service.dart';
 import 'package:aliadasapp/services/perfil_candidata_cadastro_service.dart';
 import 'package:aliadasapp/ui/components/SimpleRoundButton.dart';
 import 'package:aliadasapp/ui/components/custom_dropdown_formfield.dart';
 import 'package:aliadasapp/ui/components/custom_multiselect_formfield.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
-import 'package:multiselect_formfield/multiselect_formfield.dart';
 
 class CrudCandidata extends StatefulWidget {
   @override
@@ -629,7 +626,14 @@ class _CrudCandidataState extends State<CrudCandidata> {
                       children: <Widget>[
                         Expanded(
                           child: SimpleRoundButton(
-                            onPressed: _saveForm,
+                            onPressed: () {
+                              _saveForm();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => null),
+                              );
+                            },
                             buttonText: Text("Cadastrar",
                               style: TextStyle(
                                   fontSize: 22,
